@@ -10,3 +10,14 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+
+if (module.hot) {
+  module.hot.accept();
+  module.hot.dispose(() => {
+    // Перед перезапуском приложения создаем новый элемент app, которым заменяем старый
+    const oldRootElem = document.querySelector('app');
+    const newRootElem = document.createElement('app');
+    oldRootElem!.parentNode!.insertBefore(newRootElem, oldRootElem);
+    platform.destroy();
+  });
+}
