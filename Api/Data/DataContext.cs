@@ -1,9 +1,6 @@
-﻿using CorePlusAngular.Models;
+﻿using Api.Models;
+using CorePlusAngular.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CorePlusAngular.Data
 {
@@ -13,6 +10,8 @@ namespace CorePlusAngular.Data
             Database.EnsureCreated();
         }
 
+        
+        public DbSet<User> Users { get; set; }
         public DbSet<Value> Values { get; set; }
     }
 }

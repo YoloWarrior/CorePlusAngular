@@ -22,7 +22,7 @@ namespace CorePlusAngular.Controllers
 
 
         // GET api/values
-        [HttpGet]
+        [HttpGet("getall")]
         public async Task<IActionResult> GetValues()
         {
             var values = await _context.Values.ToListAsync();

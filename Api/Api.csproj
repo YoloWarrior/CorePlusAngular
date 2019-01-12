@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20181124231045_InitialMigration.cs" />
+    <Compile Remove="Migrations\20181124231045_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20181229154258_AddUserEntity.cs" />
+    <Compile Remove="Migrations\20181229154258_AddUserEntity.Designer.cs" />
+    <Compile Remove="Migrations\20181229224719_AddUserEntity.cs" />
+    <Compile Remove="Migrations\20181229224719_AddUserEntity.Designer.cs" />
+    <Compile Remove="Migrations\20181229230241_AddUserEntity.cs" />
+    <Compile Remove="Migrations\20181229230241_AddUserEntity.Designer.cs" />
+    <Compile Remove="Migrations\20181229231009_AddUserEntity.cs" />
+    <Compile Remove="Migrations\20181229231009_AddUserEntity.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
