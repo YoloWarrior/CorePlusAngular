@@ -11,7 +11,11 @@ namespace Api.Dtos
         [Required]
         public string Username { get; set; }
         [Required]
+        public string Email { get; set; }
+        [Required]
         [StringLength(50,MinimumLength =4,ErrorMessage ="Password must be before 4 and 50")]
         public string Password { get; set; }
+
+        
     }
 }

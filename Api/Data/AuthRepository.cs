@@ -1,4 +1,5 @@
-﻿using Api.Models;
+﻿using Api.Dtos;
+using Api.Models;
 using CorePlusAngular.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -52,8 +53,9 @@ namespace Api.Data
             user.PasswordSalt = passwordSalt;
 
             await _context.Users.AddAsync(user);
+               
             await _context.SaveChangesAsync();
-
+           
             return user;
             
         }
@@ -73,6 +75,18 @@ namespace Api.Data
                 return true;
 
             return false;
+        }
+        public async Task<User> GetUser(string username)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == username);
+          
+            return user;
+        }
+        public  void Update(User user)
+        {
+           if(user != null)
+            _context.Users.Update(user);
+            _context.SaveChanges();
         }
     }
 }

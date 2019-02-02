@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Dtos;
 using CorePlusAngular.Data;
+using CorePlusAngular.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace CorePlusAngular.Controllers
 {
@@ -31,18 +34,15 @@ namespace CorePlusAngular.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetValue(int id)
-        {
-            var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
-            return Ok(value);
-        }
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetValue(int id)
+        //{
+        //    var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
+        //    return Ok(value);
+        //}
 
         // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        
 
         // PUT api/values/5
         [HttpPut("{id}")]

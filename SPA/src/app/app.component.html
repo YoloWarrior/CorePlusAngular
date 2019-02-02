@@ -1,8 +1,19 @@
 <app-nav></app-nav>
+
 <div>
+	<div *ngIf="!registerMode && !loggedIn()" style="text-align: center;">
   <h1>
-    Welcome to {{ title }}!
+    Hi.You wanna create your event or join existing.We can help you.
   </h1>
-  
-<app-value></app-value>
-</div>
+  <div>
+  	<button class="btn btn-info btn-lg" type="submit" (click)="RegisterMethod()">Join Us</button>
+  </div>
+  </div>
+  <div class="container"  *ngIf=registerMode>
+  	<div class="col-5">
+  			<app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+  		</div>
+
+  </div>
+  		
+</div>	

@@ -2,11 +2,13 @@ import {Component,OnInit} from '@angular/core';
 import {AuthService} from '../_services/auth.service';
 @Component({
 	selector:'app-nav',
-	templateUrl:'./nav.component.html'
+	templateUrl:'./nav.component.html',
+	styleUrls: ['./nav.styles.css']
+	
 })
 export class  NavComponent implements OnInit {
 	model:any = {};
-	constructor(private authSercice:AuthService) {
+	constructor(public authSercice:AuthService) {
 		// code...
 	}
 	ngOnInit(){
@@ -19,9 +21,9 @@ export class  NavComponent implements OnInit {
 			console.log("error");
 		})
 	}
+
 	loggedIn(){
-		const token = localStorage.getItem('token');
-		return !!token;
+		return this.authSercice.loggedIn();
 	}
 	loggedOut(){
 		localStorage.removeItem('token');
