@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.Dtos;
+using Api.Models;
 using CorePlusAngular.Data;
 using CorePlusAngular.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
@@ -21,10 +23,11 @@ namespace CorePlusAngular.Controllers
         {
             _context = context;
         }
-
+        
 
 
         // GET api/values
+        [Authorize(Policy = "OnlyValidUsers")]
         [HttpGet("getall")]
         public async Task<IActionResult> GetValues()
         {

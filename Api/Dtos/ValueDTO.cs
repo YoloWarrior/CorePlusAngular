@@ -10,7 +10,7 @@ namespace Api.Dtos
 {
     public class ValueDTO
     {
-        private string _extendedData;
+     
      
     }
 }

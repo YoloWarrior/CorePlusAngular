@@ -104,7 +104,7 @@ namespace Api.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier,logUser.Id.ToString()),
                 new Claim(ClaimTypes.Name,userForLoginDTO.Username),
-                new Claim("IsConfirm",userConfirm.ToString().ToLower())
+                new Claim("IsConfirm",userConfirm.ToString())
 
             };
             
