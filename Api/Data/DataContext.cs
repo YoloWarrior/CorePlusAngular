@@ -21,13 +21,9 @@ namespace CorePlusAngular.Data
         {
             
             modelBuilder.Entity<User>();
-
-
-            modelBuilder.Entity<Value>()
-         .Property<string>("ExtendedData")
-         .HasField("_extendedData")
-          .UseSqlServerIdentityColumn();
             
+            modelBuilder.Entity<Value>();
+         
             base.OnModelCreating(modelBuilder);
         }   
                 

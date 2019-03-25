@@ -44,7 +44,9 @@ namespace Api.Controllers
             var CreateUser = new User
             {
                 UserName = userForRegisterDTO.Username,
-                Email = userForRegisterDTO.Email
+                Email = userForRegisterDTO.Email,
+                IsConfirm = false
+                
             };
             var CreatedUser = await _repos.Register(CreateUser, userForRegisterDTO.Password);
         
@@ -62,17 +64,12 @@ namespace Api.Controllers
            
         }
 
-        public async Task<bool> IsConfirm(bool isgood,string username)
+        public async Task<bool> IsConfirm(string username)
         {
+            bool isgood = false;
             var users = await _repos.GetUser(username);
-            return isgood = users.IsConfirm;
+            return  isgood = users.IsConfirm;
         }
-        
-
-            
-        
-        
-
         
         [HttpGet]
         [AllowAnonymous]
@@ -94,38 +91,46 @@ namespace Api.Controllers
 
 
         [HttpPost("login")]
-        public async Task<IActionResult>Login(UserForLoginDTO userForLoginDTO)
+        [AllowAnonymous]
+        public async Task<IActionResult>Login([FromBody]UserForLoginDTO userForLoginDTO)
         {
+          
             var logUser = await _repos.Login(userForLoginDTO.Username.ToLower(), userForLoginDTO.Password);
             
             if (logUser == null)
                 return Unauthorized();
-            if (IsConfirm(logUser.IsConfirm,userForLoginDTO.Username).Result==false)
-            {
-                
-            }
+            var userConfirm = await IsConfirm(userForLoginDTO.Username);
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier,logUser.Id.ToString()),
                 new Claim(ClaimTypes.Name,userForLoginDTO.Username),
+                new Claim("IsConfirm",userConfirm.ToString().ToLower())
 
             };
+            
+
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
 
             var creds = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
 
+            
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
+                Expires = DateTime.Now.AddHours(1),
                 SigningCredentials = creds
             };
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            EmailService em = new EmailService();
-
+            //if (await userConfirm == false)
+            //{
+              
+            //    return Content("Пожалуйста подтвердите email адрес");
+                
             
+
             return Ok(new {
                 token = tokenHandler.WriteToken(token)
             });

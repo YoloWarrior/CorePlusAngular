@@ -18,7 +18,7 @@ export class  NavComponent implements OnInit {
 		this.authSercice.login(this.model).subscribe(next=>{
 			console.log('Logged')
 		},error=>{
-			console.log("error");
+			console.log(error);
 		})
 	}
 
